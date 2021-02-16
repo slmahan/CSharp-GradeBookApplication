@@ -2,6 +2,7 @@
 {
     public enum GradeBookType
     { 
+        //some comment here 
        Standard,
        Ranked,
        ESNU,
