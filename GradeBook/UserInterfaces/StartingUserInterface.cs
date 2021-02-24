@@ -34,9 +34,9 @@ namespace GradeBook.UserInterfaces
         public static void CreateCommand(string command)
         {
             var parts = command.Split(' ');
-            if (parts.Length != 2)
+            if (parts.Length != 3)
             {
-                Console.WriteLine("Command not valid, Create requires a name.");
+                Console.WriteLine("Command not valid, Create requires a name and type of gradebook.");
                 return;
             }
             var name = parts[1];
@@ -53,13 +53,24 @@ namespace GradeBook.UserInterfaces
                 Console.WriteLine("Command not valid, Load requires a name.");
                 return;
             }
-            var name = parts[1];
-            var gradeBook = BaseGradeBook.Load(name);
 
-            if (gradeBook == null)
-                return;
+            var name = parts[2];
+            BaseGradeBook gradeBook;
+             
+            switch (name)
+            {
+                case "standard":
+                    gradeBook = StandardGradeBook.Load(parts[1]);
+                    break;
+                case "ranked":
+                    gradeBook = RankedGradeBook.Load(parts[1]);
+                    break;
+                default:
+                    Console.WriteLine(parts[2] + " is not a asupported type of gradebook, please try again.");
+                    return;
+            }
 
-            GradeBookUserInterface.CommandLoop(gradeBook);
+        GradeBookUserInterface.CommandLoop(gradeBook);
         }
 
         public static void HelpCommand()
@@ -67,7 +78,7 @@ namespace GradeBook.UserInterfaces
             Console.WriteLine();
             Console.WriteLine("GradeBook accepts the following commands:");
             Console.WriteLine();
-            Console.WriteLine("Create 'Name' - Creates a new gradebook where 'Name' is the name of the gradebook.");
+            Console.WriteLine("Create 'Name' 'Type' - Creates a new gradebook where 'Name' is the name of the gradebook and 'Type' is what type of grading it should use.");
             Console.WriteLine();
             Console.WriteLine("Load 'Name' - Loads the gradebook with the provided 'Name'.");
             Console.WriteLine();
