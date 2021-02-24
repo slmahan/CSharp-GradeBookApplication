@@ -70,9 +70,9 @@ namespace GradeBook.UserInterfaces
 
             var name = parts[1];
 
-            BaseGradeBook gradeBook = new BaseGradeBook(name);
+ //           BaseGradeBook gradeBook = new BaseGradeBook(name);
 
-        GradeBookUserInterface.CommandLoop(gradeBook);
+ //       GradeBookUserInterface.CommandLoop(gradeBook);
         }
 
         public static void HelpCommand()
